@@ -32,7 +32,7 @@ st.write(base_table)
 
 funnel_step = st.selectbox('Выберите этап воронки', funnel_steps[1:])
 platforms = st.multiselect('Выберите платформы', ['IOS', 'Android', 'Web'])
-uplift = st.number_input('Введите размер изменения метрики в процентных пунтах')
+uplift = st.number_input('Введите размер изменения метрики в процентных пунтах', step=0.1)
 
 
 def calculate_uplift(funnel_step, platform, uplift):
