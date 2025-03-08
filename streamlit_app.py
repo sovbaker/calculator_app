@@ -26,6 +26,7 @@ base_metrics = {'IOS':{'Первый заход': 600,
                        'Проведение первого сражения': 250,
                        'Получение приза за выполнение еженедельного задания': 241}}
 
+st.write('Изначальные показатели')
 base_table = pd.DataFrame(base_metrics)
 st.write(base_table)
 
@@ -40,7 +41,7 @@ def calculate_uplift(funnel_step, platform, uplift):
     base_conversion = base_metrics[platform][funnel_step]/base_metrics[platform][previous_step]
     final_step_relative_uplift = (base_conversion+uplift_value)/base_conversion
     final_step_uplift = base_metrics[platform]['Получение приза за выполнение еженедельного задания'] * final_step_relative_uplift
-    return final_step_uplift
+    return round(final_step_uplift,3)
 
 
 if st.button('Посчитать'):
@@ -59,4 +60,5 @@ if st.button('Посчитать'):
     elif funnel_step == 'Получение приза за выполнение еженедельного задания':
         for platform in platforms:
             st.write(f'При изменении метрики на {uplift}п.п. на {platform}, количество пользователей прошедших всю воронку будет равно {calculate_uplift(funnel_step, platform, uplift)}')
+
 
