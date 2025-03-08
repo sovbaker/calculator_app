@@ -34,7 +34,9 @@ base_metrics = {'IOS':{'Первый заход': 600,
 
 st.write('Изначальные показатели')
 base_table = pd.DataFrame(base_metrics)
-st.write(base_table)
+new_table = st.data_editor(base_table)
+base_metrics = new_table.to_dict('dict')
+st.write(base_metrics)
 
 funnel_step = st.selectbox('Выберите этап воронки', funnel_steps[1:])
 platforms = st.multiselect('Выберите платформы', ['IOS', 'Android', 'Web'])
