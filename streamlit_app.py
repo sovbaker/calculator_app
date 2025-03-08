@@ -1,5 +1,5 @@
 import streamlit as st
-
+import pandas as pd
 st.title("Калькулятор инициатив")
 st.write(
     ''' Даннный калькулятор поможет вам оценить влияние вашей инициативы на результаты. 
@@ -9,9 +9,6 @@ st.write(
 funnel_steps = ['Первый заход', 'Создание персонажа', 'Покупка первого юнита', 'Проведение первого сражения'
     , 'Получение приза за выполнение еженедельного задания']
 
-funnel_step = st.selectbox('Выберите этап воронки', funnel_steps[1:])
-platforms = st.multiselect('Выберите платформы', ['IOS', 'Android', 'Web'])
-uplift = st.number_input('Введите размер изменения метрики в процентных пунтах')
 
 base_metrics = {'IOS':{'Первый заход': 600,
                        'Создание персонажа': 489,
@@ -28,6 +25,14 @@ base_metrics = {'IOS':{'Первый заход': 600,
                        'Покупка первого юнита': 290,
                        'Проведение первого сражения': 250,
                        'Получение приза за выполнение еженедельного задания': 241}}
+
+base_table = pd.DataFrame(base_metrics)
+st.write(base_table)
+
+funnel_step = st.selectbox('Выберите этап воронки', funnel_steps[1:])
+platforms = st.multiselect('Выберите платформы', ['IOS', 'Android', 'Web'])
+uplift = st.number_input('Введите размер изменения метрики в процентных пунтах')
+
 
 def calculate_uplift(funnel_step, platform, uplift):
     uplift_value = uplift / 100
