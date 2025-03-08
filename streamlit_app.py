@@ -9,7 +9,7 @@ st.write(
 funnel_steps = ['Первый заход', 'Создание персонажа', 'Покупка первого юнита', 'Проведение первого сражения'
     , 'Получение приза за выполнение еженедельного задания']
 
-funnel_step = st.selectbox('Выберите этап воронки', funnel_steps)
+funnel_step = st.selectbox('Выберите этап воронки', funnel_steps[1:])
 platforms = st.multiselect('Выберите платформы', ['IOS', 'Android', 'Web'])
 uplift = st.number_input('Введите размер изменения метрики в процентных пунтах')
 
@@ -41,17 +41,17 @@ def calculate_uplift(funnel_step, platform, uplift):
 if st.button('Посчитать'):
     if funnel_step == 'Первый заход':
         for platform in platforms:
-            st.write(f'При изменении метрики на {uplift}п.п. на {platform} изменение метрики на {funnel_step} будет равно {calculate_uplift(funnel_step, platform, uplift)}')
+            st.write(f'При изменении метрики на {uplift}п.п. на {platform}, количество пользователей прошедших всю воронку будет равно {calculate_uplift(funnel_step, platform, uplift)}')
     elif funnel_step == 'Создание персонажа':
         for platform in platforms:
-            st.write(f'При изменении метрики на {uplift}п.п. на {platform} изменение метрики на {funnel_step} будет равно {calculate_uplift(funnel_step, platform, uplift)}')
+            st.write(f'При изменении метрики на {uplift}п.п. на {platform}, количество пользователей прошедших всю воронку будет равно {calculate_uplift(funnel_step, platform, uplift)}')
     elif funnel_step == 'Покупка первого юнита':
         for platform in platforms:
-            st.write(f'При изменении метрики на {uplift}п.п. на {platform} изменение метрики на {funnel_step} будет равно {calculate_uplift(funnel_step, platform, uplift)}')
+            st.write(f'При изменении метрики на {uplift}п.п. на {platform}, количество пользователей прошедших всю воронку будет равно  {calculate_uplift(funnel_step, platform, uplift)}')
     elif funnel_step == 'Проведение первого сражения':
         for platform in platforms:
-            st.write(f'При изменении метрики на {uplift}п.п. на {platform} изменение метрики на {funnel_step} будет равно {calculate_uplift(funnel_step, platform, uplift)}')
+            st.write(f'При изменении метрики на {uplift}п.п. на {platform}, количество пользователей прошедших всю воронку будет равно {calculate_uplift(funnel_step, platform, uplift)}')
     elif funnel_step == 'Получение приза за выполнение еженедельного задания':
         for platform in platforms:
-            st.write(f'При изменении метрики на {uplift}п.п. на {platform} изменение метрики на {funnel_step} будет равно {calculate_uplift(funnel_step, platform, uplift)}')
+            st.write(f'При изменении метрики на {uplift}п.п. на {platform}, количество пользователей прошедших всю воронку будет равно {calculate_uplift(funnel_step, platform, uplift)}')
 
