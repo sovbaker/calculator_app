@@ -62,3 +62,8 @@ if st.button('Посчитать'):
             st.write(f'При изменении метрики на {uplift}п.п. на {platform}, количество пользователей прошедших всю воронку будет равно {calculate_uplift(funnel_step, platform, uplift)}')
 
 
+st.write('## Проект 1')
+st.image('Снимок экрана 2025-03-08 в 15.59.44.png')
+st.write('## Проект 2')
+st.image('Снимок экрана 2025-03-08 в 16.00.10.png')
+
