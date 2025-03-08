@@ -36,8 +36,6 @@ st.write('Изначальные показатели')
 base_table = pd.DataFrame(base_metrics)
 new_table = st.data_editor(base_table)
 base_metrics = new_table.to_dict('dict')
-st.write(base_metrics)
-
 funnel_step = st.selectbox('Выберите этап воронки', funnel_steps[1:])
 platforms = st.multiselect('Выберите платформы', ['IOS', 'Android', 'Web'])
 uplift = st.number_input('Введите размер изменения метрики в процентных пунтах', step=0.1)
