@@ -3,12 +3,7 @@ import streamlit as st
 st.title("Калькулятор инициатив")
 st.write(
     ''' Даннный калькулятор поможет вам оценить влияние вашей инициативы на результаты. 
-    Для того, чтобы им воспользоваться вам не обходимо ввести:
-        1. шаг воронки, на который повлияет изменение;
-            
-        2. насколько сильно изменится метрика;
-            
-        3. платформы, которые проект заденет.'''
+    Для того, чтобы им воспользоваться вам не обходимо ввести: 1. шаг воронки, на который повлияет изменение; 2. насколько сильно изменится метрика; 3. платформы, которые проект заденет.'''
 )
 
 funnel_steps = ['Первый заход', 'Создание персонажа', 'Покупка первого юнита', 'Проведение первого сражения'
@@ -36,24 +31,27 @@ base_metrics = {'IOS':{'Первый заход': 600,
 
 def calculate_uplift(funnel_step, platform, uplift):
     uplift_value = uplift / 100
-    final_step_uplift = base_metrics[platform]['Получение приза за выполнение еженедельного задания'] * (1+uplift_value)
+    previous_step = funnel_steps[funnel_steps.index(funnel_step)-1]
+    base_conversion = base_metrics[platform][funnel_step]/base_metrics[platform][previous_step]
+    final_step_relative_uplift = (base_conversion+uplift_value)/base_conversion
+    final_step_uplift = base_metrics[platform]['Получение приза за выполнение еженедельного задания'] * final_step_relative_uplift
     return final_step_uplift
 
 
 if st.button('Посчитать'):
     if funnel_step == 'Первый заход':
         for platform in platforms:
-            st.write(f'При изменении метрики на {uplift}% на {platform} изменение метрики на {funnel_step} будет равно {calculate_uplift(funnel_step, platform, uplift)}')
+            st.write(f'При изменении метрики на {uplift}п.п. на {platform} изменение метрики на {funnel_step} будет равно {calculate_uplift(funnel_step, platform, uplift)}')
     elif funnel_step == 'Создание персонажа':
         for platform in platforms:
-            st.write(f'При изменении метрики на {uplift}% на {platform} изменение метрики на {funnel_step} будет равно {calculate_uplift(funnel_step, platform, uplift)}')
+            st.write(f'При изменении метрики на {uplift}п.п. на {platform} изменение метрики на {funnel_step} будет равно {calculate_uplift(funnel_step, platform, uplift)}')
     elif funnel_step == 'Покупка первого юнита':
         for platform in platforms:
-            st.write(f'При изменении метрики на {uplift}% на {platform} изменение метрики на {funnel_step} будет равно {calculate_uplift(funnel_step, platform, uplift)}')
+            st.write(f'При изменении метрики на {uplift}п.п. на {platform} изменение метрики на {funnel_step} будет равно {calculate_uplift(funnel_step, platform, uplift)}')
     elif funnel_step == 'Проведение первого сражения':
         for platform in platforms:
-            st.write(f'При изменении метрики на {uplift}% на {platform} изменение метрики на {funnel_step} будет равно {calculate_uplift(funnel_step, platform, uplift)}')
+            st.write(f'При изменении метрики на {uplift}п.п. на {platform} изменение метрики на {funnel_step} будет равно {calculate_uplift(funnel_step, platform, uplift)}')
     elif funnel_step == 'Получение приза за выполнение еженедельного задания':
         for platform in platforms:
-            st.write(f'При изменении метрики на {uplift}% на {platform} изменение метрики на {funnel_step} будет равно {calculate_uplift(funnel_step, platform, uplift)}')
+            st.write(f'При изменении метрики на {uplift}п.п. на {platform} изменение метрики на {funnel_step} будет равно {calculate_uplift(funnel_step, platform, uplift)}')
 
